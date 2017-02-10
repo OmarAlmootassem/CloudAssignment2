@@ -9,13 +9,13 @@
 			<md-button class="md-icon-button" ng-click="cancel()"><md-icon class="material-icons">close</md-icon></md-button>
 		</div>
 	</md-toolbar>
-	<md-dialog-content>
+	<md-dialog-content layout-padding>
 		<div class="md-dialog-content">
 			<form name="uploadImageForm" layout="column">
 			    <lf-ng-md-file-input name="images" lf-files="image" lf-api="image" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
-
 			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()">UPLOAD</md-button>
 			</form>
+			<md-chips ng-model="imageTags" placeholder="Add More Tags..." readonly="false" md-removable="true" md-enable-chip-edit="true"></md-chips>
 		</div>
 	</md-dialog-content>
 </md-dialog>

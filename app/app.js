@@ -51,6 +51,8 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 	}
 
 	function AddDialogController($scope, $mdDialog){
+		$scope.imageTags = ["cat", "dog", "hat"];
+
 	    $scope.cancel = function() {
 	      $mdDialog.cancel();
 	    };
