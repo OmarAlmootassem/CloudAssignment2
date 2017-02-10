@@ -24,7 +24,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			console.log("Signed In");
 			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
 				$scope.initials = snapshot.val().first_name.charAt(0);
-				console.log($scope.initials);
 				$scope.$applyAsync();
 			});
 		} else {
@@ -52,6 +51,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
 	function AddDialogController($scope, $mdDialog){
 		$scope.imageTags = ["cat", "dog", "hat"];
+		$scope.date = new Date();
 
 	    $scope.cancel = function() {
 	      $mdDialog.cancel();

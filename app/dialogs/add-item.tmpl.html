@@ -13,9 +13,20 @@
 		<div class="md-dialog-content">
 			<form name="uploadImageForm" layout="column">
 			    <lf-ng-md-file-input name="images" lf-files="image" lf-api="image" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
-			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()">UPLOAD</md-button>
+			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()" style="display: none;">UPLOAD</md-button>
 			</form>
+			<div layout="row" style="margin-top: 2%;"></div>
+			<div layout="row">
+				<div flex layout-padding>Upload Date: </div>
+				<md-datepicker flex md-open-on-focus ng-model="date" md-placeholder="Enter date"></md-datepicker>
+			</div>
+			<div flex layout-padding>Image Tags</div>
 			<md-chips ng-model="imageTags" placeholder="Add More Tags..." readonly="false" md-removable="true" md-enable-chip-edit="true"></md-chips>
 		</div>
 	</md-dialog-content>
+	<md-dialog-actions>
+		<span flex></span>
+		<md-button md-autofocus ng-click="cancel()">Cancel</md-button>
+		<md-button md-autofocus>Add Item</md-button>
+	</md-dialog-actions>
 </md-dialog>
