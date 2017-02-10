@@ -44,7 +44,7 @@
       </div>
       <md-button ng-click="showAddDialog($event)">ADD ITEM</md-button>
       <div flex></div>
-      <md-button class="md-fab md-mini" aria-label="Account" style="background-color: transparent;"><ng-avatar initials="A" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar></md-button>
+      <md-button ng-if="initials" class="md-fab md-mini" aria-label="Account" style="background-color: transparent;"><ng-avatar initials="{{initials}}" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar></md-button>
     </div>
   </md-toolbar>
 </md-content>

@@ -13,18 +13,26 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $routeProvider.otherwise({redirectTo: '/view_auth'});
 }])
 
-.controller('NavCtrl', function($scope, $mdDialog) {
+.controller('NavCtrl', function($scope, $mdDialog, $location) {
 	$scope.name = "Omar Almootassem";
 
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user){
 			//User is signed in
 			$scope.auth = true;
+			$location.path('view2');
 			console.log("Signed In");
+			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
+				$scope.initials = snapshot.val().first_name.charAt(0);
+				console.log($scope.initials);
+				$scope.$applyAsync();
+			});
 		} else {
 			//No user signed in
 			$scope.auth = false;
+			$location.path('auth_view');
 			console.log("Not Signed In");
+			$scope.$applyAsync();
 		}
 	})
 
