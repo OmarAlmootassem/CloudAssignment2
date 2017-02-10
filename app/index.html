@@ -44,7 +44,15 @@
       </div>
       <md-button ng-click="showAddDialog($event)">ADD ITEM</md-button>
       <div flex></div>
-      <md-button ng-if="initials" class="md-fab md-mini" aria-label="Account" style="background-color: transparent;"><ng-avatar initials="{{initials}}" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar></md-button>
+      <md-menu ng-if="initials" md-offset="0 60">
+        <md-button ng-click="$mdOpenMenu()" class="md-icon-button" aria-label="Open sample menu">
+          <ng-avatar md-menu-origin initials="{{initials}}" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar>
+        </md-button>
+        <md-menu-content>
+          <md-menu-item><md-button>MyAccount</md-button></md-menu-item>
+          <md-menu-item><md-button ng-click="signOut()">Logout</md-button></md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </div>
   </md-toolbar>
 </md-content>

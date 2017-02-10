@@ -34,7 +34,11 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			console.log("Not Signed In");
 			$scope.$applyAsync();
 		}
-	})
+	});
+
+	$scope.signOut = function(){
+		firebase.auth().signOut();
+	}
 
 	$scope.showAddDialog = function(ev){
 		$mdDialog.show({
@@ -44,7 +48,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			targetEvent: ev,
 			clickOutsideToClose: true,
 		});
-	};
+	}
 
 	function AddDialogController($scope, $mdDialog){
 	    $scope.cancel = function() {
