@@ -1,0 +1,67 @@
+<div ng-controller="ViewAuthCtrl" class="md-padding auth-backdrop" ng-cloak>
+	<h1 flex class="title">Inventory Management</h1>
+	<md-content flex="30" layout-padding class="auth-info animated" ng-class="!signInUp ? 'fadeIn show': 'fadeOut hide'">
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>First Name</label>
+				<md-icon class="material-icons">person</md-icon>
+				<input ng-model="user.fname">
+			</md-input-container>
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Last Name</label>
+				<md-icon class="material-icons">person</md-icon>
+				<input ng-model="user.lname">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Email</label>
+				<md-icon class="material-icons">mail</md-icon>
+				<input ng-model="user.email">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Password</label>
+				<md-icon class="material-icons">lock</md-icon>
+				<input ng-model="user.password">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Repeat Password</label>
+				<md-icon class="material-icons">lock</md-icon>
+				<input ng-model="user.rptPassword">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-button flex class="md-raised md-primary">Create Account</md-button>
+		</div>
+		<div flex layout="row">
+			<md-button flex class="md-primary" ng-click="switchView()">Already Have An Account?</md-button>
+		</div>
+	</md-content>
+
+	<md-content flex="30" layout-padding class="auth-info animated" ng-class="signInUp ? 'fadeIn show': 'fadeOut hide'">
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Email</label>
+				<md-icon class="material-icons">mail</md-icon>
+				<input ng-model="user.email">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-input-container flex class="md-icon-float md-block">
+				<label>Password</label>
+				<md-icon class="material-icons">lock</md-icon>
+				<input ng-model="user.password">
+			</md-input-container>
+		</div>
+		<div flex layout="row">
+			<md-button flex class="md-raised md-primary">Sign In</md-button>
+		</div>
+		<div flex layout="row">
+			<md-button flex class="md-primary" ng-click="switchView()">Don't Have An Account?</md-button>
+		</div>
+	</md-content>
+</div>

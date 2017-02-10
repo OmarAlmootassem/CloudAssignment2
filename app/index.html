@@ -12,6 +12,8 @@
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="./bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.css">
@@ -20,7 +22,7 @@
 </head>
 <body ng-controller="NavCtrl">
 <md-content>
-  <md-toolbar>
+  <md-toolbar ng-if="auth" ng-cloak>
     <div class="md-toolbar-tools">
       <div flex="5"></div>
       <div flex="25">Inventory Management</div>
@@ -47,10 +49,10 @@
   </md-toolbar>
 </md-content>
 
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
+<!--   <ul class="menu">
+    <li><a href="#!/view_auth">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
-  </ul>
+  </ul> -->
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -58,7 +60,21 @@
 
   <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+  <!-- <div>Angular seed app: v<span app-version></span></div> -->
+
+
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCcrdfcIN6hqedcPchpTau3Ku11bqw2YFw",
+      authDomain: "cloud2-dbb2a.firebaseapp.com",
+      databaseURL: "https://cloud2-dbb2a.firebaseio.com",
+      storageBucket: "cloud2-dbb2a.appspot.com",
+      messagingSenderId: "537038181728"
+    };
+    firebase.initializeApp(config);
+  </script>
 
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -73,7 +89,7 @@
   <script src="components/angular-avatar/angular-avatar.min.js"></script>
   <script src="./bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
+  <script src="view_auth/view_auth.js"></script>
   <script src="view2/view2.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>

@@ -1,4 +1,7 @@
 /* app css stylesheet */
+body{
+	font-family: 'Roboto', sans-serif;
+}
 
 .menu {
   list-style: none;
@@ -22,4 +25,34 @@
 .menu > li + li:before {
   content: "|";
   padding-right: 0.3em;
+}
+
+.auth-backdrop{
+	background: linear-gradient(
+			rgba(0, 0, 0, 0.5),
+			rgba(0, 0, 0, 0.5)
+		),
+		url('/img/backdrop.jpg');
+	background-size: cover;
+	height: 96.75vh;
+	overflow-y: hidden !important;
+}
+
+.title{
+	text-align: center;
+	color: #FFF;
+	font-size: 3em;
+}
+
+.auth-info{
+	background-color: rgba(255, 255, 255, 0.9);
+	margin: auto;
+}
+
+.hide {
+	display: none;
+}
+
+.show{
+	display: block;
 }
