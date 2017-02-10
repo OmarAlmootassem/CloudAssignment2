@@ -1,0 +1,21 @@
+
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+<md-dialog aria-label="Upload Image">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Add a New Item</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click="cancel()"><md-icon class="material-icons">close</md-icon></md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content>
+		<div class="md-dialog-content">
+			<form name="uploadImageForm" layout="column">
+			    <lf-ng-md-file-input name="images" lf-files="image" lf-api="image" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
+
+			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()">UPLOAD</md-button>
+			</form>
+		</div>
+	</md-dialog-content>
+</md-dialog>

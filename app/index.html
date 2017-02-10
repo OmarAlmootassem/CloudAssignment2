@@ -14,10 +14,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="./bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body ng-controller="NavCtrl">
 <md-content>
   <md-toolbar>
     <div class="md-toolbar-tools">
@@ -39,7 +40,7 @@
           </md-autocomplete>
         </md-content>
       </div>
-      <md-button>UPLOAD</md-button>
+      <md-button ng-click="showAddDialog($event)">ADD ITEM</md-button>
       <div flex></div>
       <md-button class="md-fab md-mini" aria-label="Account" style="background-color: transparent;"><ng-avatar initials="A" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar></md-button>
     </div>
@@ -70,6 +71,7 @@
 
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="components/angular-avatar/angular-avatar.min.js"></script>
+  <script src="./bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js"></script>
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
