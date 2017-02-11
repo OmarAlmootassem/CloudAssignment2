@@ -41,7 +41,15 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			snapshot.forEach(function(childSnapshot){
 				$rootScope.itemList.push(childSnapshot.val());
 			});
-			$rootScope.$applyAsync();
+			for (var i = 0; i < $rootScope.itemList.length; i++){
+				var urlCounter = 0;
+				$rootScope.itemList[i].formatted_date = moment($rootScope.itemList[i].date).format("MMM/D/YYYY");
+				firebase.storage().ref($rootScope.itemList[i].image_ref).getDownloadURL().then(function(url){
+					$rootScope.itemList[urlCounter].imageUrl = url;
+					urlCounter++;
+					$rootScope.$applyAsync();
+				});
+			}
 		});
 	}
 
@@ -109,7 +117,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 				console.log(snapshot);
 				var postKey = firebase.database().ref("items/" + firebase.auth().currentUser.uid).push().key;
 				firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey).update({
-					date: $scope.date.toString(),
+					date: $scope.date.toISOString(),
 					image_ref: snapshot.a.fullPath
 				}, function(error){
 					if (error){

@@ -5,7 +5,25 @@
 		<h2>Add an Item to Start!</h2>
 	</div>
 	<div class="items-list" ng-if="itemList.length > 0">
-	Items
+		<md-content class="md-padding" layout-xs="column" layout="row">
+	      <md-card ng-repeat="item in itemList track by $index" style="width: 20em;">
+	        <img ng-src="{{item.imageUrl}}" class="md-card-image" alt="Washed Out" style="width: auto; height: 15em">
+	        <md-card-title>
+	          <md-card-title-text>
+	            <span class="md-headline">Action buttons</span>
+	            <span class="md-subhead">{{item.formatted_date}}</span>
+	          </md-card-title-text>
+	        </md-card-title>
+	        <md-card-content>
+	        	<p>Tags</p>
+	        	<md-chips ng-model="item.tags" readonly="true" md-removable="false"></md-chips>
+	        </md-card-content>
+	        <md-card-actions layout="row" layout-align="end center">
+	          <md-button class="md-primary">Edit</md-button>
+	          <md-button class="md-warn">Delete</md-button>
+	        </md-card-actions>
+	      </md-card>
+      </md-content>
 	</div>
 
 </div>
