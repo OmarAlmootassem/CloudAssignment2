@@ -3,13 +3,13 @@
 angular.module('myApp.view_auth', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view_auth', {
+  $routeProvider.when('/auth', {
     templateUrl: 'view_auth/view_auth.html',
-    controller: 'ViewAuthCtrl'
+    controller: 'AuthCtrl'
   });
 }])
 
-.controller('ViewAuthCtrl', function($scope, $mdToast) {
+.controller('AuthCtrl', function($scope, $mdToast) {
 	$scope.signInUp = false;
 	$scope.user = {};
 

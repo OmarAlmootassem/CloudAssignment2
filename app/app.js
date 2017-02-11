@@ -4,7 +4,7 @@
 angular.module('myApp', ['ngMaterial', 'ngAvatar', 'lfNgMdFileInput',
   'ngRoute',
   'myApp.view_auth',
-  'myApp.view2',
+  'myApp.view_home',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
@@ -19,7 +19,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		if (user){
 			//User is signed in
 			$scope.auth = true;
-			$location.path('view2');
+			$location.path('home');
 			console.log("Signed In");
 			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
 				$scope.initials = snapshot.val().first_name.charAt(0);
@@ -28,7 +28,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		} else {
 			//No user signed in
 			$scope.auth = false;
-			$location.path('auth_view');
+			$location.path('auth');
 			console.log("Not Signed In");
 			$scope.$applyAsync();
 		}

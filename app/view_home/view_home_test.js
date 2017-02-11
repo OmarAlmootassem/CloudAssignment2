@@ -1,6 +1,6 @@
 'use strict';
 
-describe('myApp.view2 module', function() {
+describe('myApp.view_home module', function() {
 
   beforeEach(module('myApp.view2'));
 

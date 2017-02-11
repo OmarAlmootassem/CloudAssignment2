@@ -49,6 +49,18 @@ body{
 	margin: auto;
 }
 
+.no-items{
+	text-align: center;
+}
+
+.no-items h3 {
+	color: #546E7A;
+}
+
+.no-items h2 {
+	color: #37474F;
+}
+
 .hide {
 	display: none;
 }
