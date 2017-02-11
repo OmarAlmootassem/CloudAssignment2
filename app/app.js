@@ -13,9 +13,10 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $routeProvider.otherwise({redirectTo: '/view_auth'});
 }])
 
-.controller('NavCtrl', function($scope, $mdDialog, $location, $mdToast) {
+.controller('NavCtrl', function($scope, $rootScope, $mdDialog, $location, $mdToast) {
 
 	firebase.auth().onAuthStateChanged(function(user){
+		$rootScope.itemList = [];
 		if (user){
 			//User is signed in
 			$scope.auth = true;
@@ -23,6 +24,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			console.log("Signed In");
 			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
 				$scope.initials = snapshot.val().first_name.charAt(0);
+				getItemList();
 				$scope.$applyAsync();
 			});
 		} else {
@@ -33,6 +35,15 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 			$scope.$applyAsync();
 		}
 	});
+
+	function getItemList(){
+		firebase.database().ref("items/" + firebase.auth().currentUser.uid).once('value').then(function(snapshot){
+			snapshot.forEach(function(childSnapshot){
+				$rootScope.itemList.push(childSnapshot.val());
+			});
+			$rootScope.$applyAsync();
+		});
+	}
 
 	$scope.signOut = function(){
 		firebase.auth().signOut();

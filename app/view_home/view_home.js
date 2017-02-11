@@ -9,6 +9,7 @@ angular.module('myApp.view_home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', function() {
+.controller('HomeCtrl', function($scope, $rootScope) {
+	console.log($rootScope.itemList);
 
 });
