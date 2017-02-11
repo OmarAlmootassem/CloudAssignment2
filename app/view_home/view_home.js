@@ -11,5 +11,6 @@ angular.module('myApp.view_home', ['ngRoute'])
 
 .controller('HomeCtrl', function($scope, $rootScope) {
 	console.log($rootScope.itemList);
+	$scope.search = $rootScope.search;
 
 });

@@ -14,6 +14,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 }])
 
 .controller('NavCtrl', function($scope, $rootScope, $mdDialog, $location, $mdToast) {
+	$rootScope.search = $scope.search;
 
 	firebase.auth().onAuthStateChanged(function(user){
 		$rootScope.itemList = [];
@@ -36,14 +37,26 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		}
 	});
 
+	$scope.filter = function(text){
+		console.log(text);
+	}
+
 	function getItemList(){
-		firebase.database().ref("items/" + firebase.auth().currentUser.uid).once('value').then(function(snapshot){
+		firebase.database().ref("items/" + firebase.auth().currentUser.uid).on('value', function(snapshot){
+			$rootScope.itemList.length = 0;
 			snapshot.forEach(function(childSnapshot){
 				$rootScope.itemList.push(childSnapshot.val());
 			});
 			for (var i = 0; i < $rootScope.itemList.length; i++){
 				var urlCounter = 0;
+				var tags = "";
 				$rootScope.itemList[i].formatted_date = moment($rootScope.itemList[i].date).format("MMM/D/YYYY");
+				for (var key in $rootScope.itemList[i].tags){
+					if ($rootScope.itemList[i].tags.hasOwnProperty(key)){
+						tags += $rootScope.itemList[i].tags[key];
+					}
+				}
+				$rootScope.itemList[i].tags_all = tags;
 				firebase.storage().ref($rootScope.itemList[i].image_ref).getDownloadURL().then(function(url){
 					$rootScope.itemList[urlCounter].imageUrl = url;
 					urlCounter++;

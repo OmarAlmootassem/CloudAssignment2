@@ -5,13 +5,13 @@
 		<h2>Add an Item to Start!</h2>
 	</div>
 	<div class="items-list" ng-if="itemList.length > 0">
+		<input type="text" ng-model="search">
 		<md-content class="md-padding" layout-xs="column" layout="row">
-	      <md-card ng-repeat="item in itemList track by $index" style="width: 20em;">
+	      <md-card ng-repeat="item in itemList | filter:{ tags_all: search } track by $index" style="width: 20em;">
 	        <img ng-src="{{item.imageUrl}}" class="md-card-image" alt="Washed Out" style="width: auto; height: 15em">
 	        <md-card-title>
 	          <md-card-title-text>
-	            <span class="md-headline">Action buttons</span>
-	            <span class="md-subhead">{{item.formatted_date}}</span>
+	            <span class="md-headline">{{item.formatted_date}}</span>
 	          </md-card-title-text>
 	        </md-card-title>
 	        <md-card-content>
