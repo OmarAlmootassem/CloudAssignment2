@@ -24,8 +24,7 @@
 <md-content>
   <md-toolbar ng-if="auth" ng-cloak>
     <div class="md-toolbar-tools">
-      <div flex="5"></div>
-      <div flex="25">Inventory Management</div>
+      <div flex="30">Personal Inventory Management</div>
       <div flex>
         <md-content>
           <md-autocomplete
@@ -49,8 +48,8 @@
           <ng-avatar md-menu-origin initials="{{initials}}" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar>
         </md-button>
         <md-menu-content>
-          <md-menu-item><md-button>MyAccount</md-button></md-menu-item>
-          <md-menu-item><md-button ng-click="signOut()">Logout</md-button></md-menu-item>
+          <md-menu-item><md-button>My Account</md-button></md-menu-item>
+          <md-menu-item><md-button ng-click="signOut()">Log Out</md-button></md-menu-item>
         </md-menu-content>
       </md-menu>
     </div>

@@ -14,7 +14,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 }])
 
 .controller('NavCtrl', function($scope, $mdDialog, $location) {
-	$scope.name = "Omar Almootassem";
 
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user){
@@ -51,10 +50,39 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
 	function AddDialogController($scope, $mdDialog){
 		$scope.imageTags = ["cat", "dog", "hat"];
+		console.log($scope.imageTags);
+		$scope.files = [];
 		$scope.date = new Date();
+		console.log($scope.date);
+
+		$scope.$watch('files.length', function(newVal, oldVal){
+			if($scope.files.length == 1){
+				console.log($scope.files);
+				console.log($scope.date);
+			}
+		});
+
+		$scope.addItem = function(){
+			firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid + '/images/' + Date.now() + $scope.files[0].lfFileName).put($scope.files[0].lfFile).then(function(snapshot){
+				console.log(snapshot);
+				var postKey = firebase.database().ref("items/" + firebase.auth().currentUser.uid).push().key;
+				firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey).update({
+					date: $scope.date.toString(),
+					image_ref: snapshot.a.fullPath
+				}, function(error){
+					if (error){
+						console.log(error.errorMessage);
+					} else {
+						for (var i = 0; i < $scope.imageTags.length; i++) {
+							firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey + "/tags").push($scope.imageTags[i]);
+						}
+					}
+				});
+			});
+		}
 
 	    $scope.cancel = function() {
 	      $mdDialog.cancel();
-	    };
+	    }
 	}
 });

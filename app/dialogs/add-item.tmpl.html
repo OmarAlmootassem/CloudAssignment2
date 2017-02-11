@@ -12,7 +12,7 @@
 	<md-dialog-content layout-padding>
 		<div class="md-dialog-content">
 			<form name="uploadImageForm" layout="column">
-			    <lf-ng-md-file-input name="images" lf-files="image" lf-api="image" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
+			    <lf-ng-md-file-input name="images" lf-files="files" lf-api="image" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
 			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()" style="display: none;">UPLOAD</md-button>
 			</form>
 			<div layout="row" style="margin-top: 2%;"></div>
@@ -27,6 +27,6 @@
 	<md-dialog-actions>
 		<span flex></span>
 		<md-button md-autofocus ng-click="cancel()">Cancel</md-button>
-		<md-button md-autofocus>Add Item</md-button>
+		<md-button md-autofocus class="md-raised md-primary" ng-click="addItem()">Add Item</md-button>
 	</md-dialog-actions>
 </md-dialog>
