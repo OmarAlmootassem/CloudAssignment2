@@ -13,7 +13,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $routeProvider.otherwise({redirectTo: '/view_auth'});
 }])
 
-.controller('NavCtrl', function($scope, $mdDialog, $location) {
+.controller('NavCtrl', function($scope, $mdDialog, $location, $mdToast) {
 
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user){
@@ -50,10 +50,8 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
 	function AddDialogController($scope, $mdDialog){
 		$scope.imageTags = [];
-		console.log($scope.imageTags);
 		$scope.files = [];
 		$scope.date = new Date();
-		console.log($scope.date);
 
 		$scope.$watch('files.length', function(newVal, oldVal){
 			if($scope.files.length == 1){
@@ -66,14 +64,9 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 					imageBase64 = imageBase64.replace('data:image/png;base64,', '');
 					var json = {
 						"requests": [
-							{
-								"image": {
-									"content": imageBase64
-								},
+							{"image": {"content": imageBase64},
 								"features": [
-									{
-										"type": "LABEL_DETECTION"
-									}
+									{"type": "LABEL_DETECTION"}
 								]
 							}
 						]
@@ -86,7 +79,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 						processData: false,
 						data:JSON.stringify(json),
 						success: function(data){
-							console.log(data);
+							// console.log(data);
 							for (var i = 0; i < data.responses[0].labelAnnotations.length; i++){
 								$scope.imageTags.push(data.responses[0].labelAnnotations[i].description);
 							}
@@ -114,6 +107,12 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 						for (var i = 0; i < $scope.imageTags.length; i++) {
 							firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey + "/tags").push($scope.imageTags[i]);
 						}
+	      				$mdDialog.cancel();
+	      				$mdToast.show(
+					        $mdToast.simple()
+					          .textContent('Item Successfuly Added')
+					          .hideDelay(3000)
+				        );
 					}
 				});
 			});
