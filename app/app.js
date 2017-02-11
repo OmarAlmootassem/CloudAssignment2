@@ -49,7 +49,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 	}
 
 	function AddDialogController($scope, $mdDialog){
-		$scope.imageTags = ["cat", "dog", "hat"];
+		$scope.imageTags = [];
 		console.log($scope.imageTags);
 		$scope.files = [];
 		$scope.date = new Date();
@@ -57,8 +57,46 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
 		$scope.$watch('files.length', function(newVal, oldVal){
 			if($scope.files.length == 1){
-				console.log($scope.files);
-				console.log($scope.date);
+				console.log($scope.files[0]);
+				var reader = new FileReader();
+				var imageBase64;
+				reader.onload = function(event){
+					imageBase64 = event.target.result;
+					imageBase64 = imageBase64.replace('data:image/jpeg;base64,', '');
+					imageBase64 = imageBase64.replace('data:image/png;base64,', '');
+					var json = {
+						"requests": [
+							{
+								"image": {
+									"content": imageBase64
+								},
+								"features": [
+									{
+										"type": "LABEL_DETECTION"
+									}
+								]
+							}
+						]
+					};
+
+					$.ajax({
+						method:'POST',
+						url:'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyB6XH2RQ-2wfUMPQSp0r06UUyXgxo42Kt8',
+						contentType: 'application/json',
+						processData: false,
+						data:JSON.stringify(json),
+						success: function(data){
+							console.log(data);
+							for (var i = 0; i < data.responses[0].labelAnnotations.length; i++){
+								$scope.imageTags.push(data.responses[0].labelAnnotations[i].description);
+							}
+							$scope.$applyAsync();
+						}, error: function(data, textStatus, errorThrown){
+							console.error(data);
+						}
+					});
+				}
+				reader.readAsDataURL($scope.files[0].lfFile);
 			}
 		});
 
