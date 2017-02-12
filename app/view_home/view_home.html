@@ -5,8 +5,8 @@
 		<h2>Add an Item to Start!</h2>
 	</div>
 	<div class="items-list" ng-if="itemList.length > 0">
-		<md-content class="md-padding" layout-xs="column" layout="row">
-	      <md-card ng-repeat="item in itemList | filter:{ tags_all: $root.search } track by $index" style="width: 20em;">
+		<md-content class="md-padding" layout="row" layout-align="space-around center" layout-wrap>
+	      <md-card ng-repeat="item in itemList | filter:{ tags_all: $root.search } track by $index" style="width: 20em; display: inline-grid;">
 	        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image" style="object-fit: cover; object-position: center; height: 15em;">
 	        <md-card-title>
 	          <md-card-title-text>
@@ -19,7 +19,7 @@
 	        </md-card-content>
 	        <md-card-actions layout="row" layout-align="end center">
 	          <!-- <md-button class="md-primary">Edit</md-button> -->
-	          <md-button>Delete</md-button>
+	          <md-button ng-click="delete($event, item, $index)">Delete</md-button>
 	        </md-card-actions>
 	      </md-card>
       </md-content>

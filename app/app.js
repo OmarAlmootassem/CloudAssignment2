@@ -128,7 +128,8 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 				var postKey = firebase.database().ref("items/" + firebase.auth().currentUser.uid).push().key;
 				firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey).update({
 					date: $scope.date.toISOString(),
-					image_url: snapshot.a.downloadURLs[0]
+					image_url: snapshot.a.downloadURLs[0],
+					image_ref: snapshot.a.fullPath
 				}, function(error){
 					if (error){
 						console.log(error.errorMessage);
