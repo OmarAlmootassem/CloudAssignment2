@@ -7,7 +7,7 @@
 	<div class="items-list" ng-if="itemList.length > 0">
 		<md-content class="md-padding" layout-xs="column" layout="row">
 	      <md-card ng-repeat="item in itemList | filter:{ tags_all: $root.search } track by $index" style="width: 20em;">
-	        <img ng-src="{{item.image_url}}" class="md-card-image" alt="Washed Out" style="width: auto; height: 15em">
+	        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image" style="object-fit: cover; object-position: center; height: 15em;">
 	        <md-card-title>
 	          <md-card-title-text>
 	            <span class="md-headline">{{item.formatted_date}}</span>
