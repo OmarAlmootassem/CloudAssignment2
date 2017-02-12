@@ -26,19 +26,10 @@
     <div class="md-toolbar-tools">
       <div flex="30">Personal Inventory Management</div>
       <div flex>
-        <md-content>
-          <md-autocomplete
-            md-input-name="autocompleteField"
-            md-input-minlength="2"
-            md-input-maxlength="18"
-            md-selected-item="selectedItem"
-            md-selected-item-change="filter(selectedItem)"
-            md-search-text="searchText"
-            md-items="item in querySearch(searchText)"
-            md-item-text="item.display"
-            placeholder="Search Inventory">
-          </md-autocomplete>
-        </md-content>
+        <div class="search-container">
+          <span class="icon"><i class="material-icons">search</i></span>
+          <input type="search" id="search" ng-model="$root.search" placeholder="Search Inventory" />
+        </div>
       </div>
       <md-button ng-click="showAddDialog($event)">ADD ITEM</md-button>
       <div flex></div>

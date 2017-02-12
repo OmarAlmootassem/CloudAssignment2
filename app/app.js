@@ -48,7 +48,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 				$rootScope.itemList.push(childSnapshot.val());
 			});
 			for (var i = 0; i < $rootScope.itemList.length; i++){
-				var urlCounter = 0;
 				var tags = "";
 				$rootScope.itemList[i].formatted_date = moment($rootScope.itemList[i].date).format("MMM/D/YYYY");
 				for (var key in $rootScope.itemList[i].tags){
@@ -57,14 +56,12 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 					}
 				}
 				$rootScope.itemList[i].tags_all = tags;
-				firebase.storage().ref($rootScope.itemList[i].image_ref).getDownloadURL().then(function(url){
-					$rootScope.itemList[urlCounter].imageUrl = url;
-					urlCounter++;
-					$rootScope.$applyAsync();
-				});
 			}
+			$scope.$applyAsync();
 		});
 	}
+
+	function querySearch(text){return [];}
 
 	$scope.signOut = function(){
 		firebase.auth().signOut();
@@ -131,7 +128,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 				var postKey = firebase.database().ref("items/" + firebase.auth().currentUser.uid).push().key;
 				firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey).update({
 					date: $scope.date.toISOString(),
-					image_ref: snapshot.a.fullPath
+					image_url: snapshot.a.downloadURLs[0]
 				}, function(error){
 					if (error){
 						console.log(error.errorMessage);
