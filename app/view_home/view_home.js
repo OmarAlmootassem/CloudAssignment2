@@ -13,8 +13,12 @@ angular.module('myApp.view_home', ['ngRoute'])
 	console.log($rootScope.itemList);
 	$scope.search = $rootScope.search;
 
+	/**
+	 *	Deletes an Items
+	 */
 	$scope.delete = function(ev, item, index){
 		console.log(item);
+		//Create and display confirmation dialog
 		var confirm = $mdDialog.confirm()
 			.title("Are You Sure?")
 			.ariaLabel("Confirmation")
@@ -23,6 +27,7 @@ angular.module('myApp.view_home', ['ngRoute'])
 			.cancel("Cancel");
 
 		$mdDialog.show(confirm).then(function(){
+			//Delete Item
 			firebase.database().ref('items/' + firebase.auth().currentUser.uid).orderByChild('image_ref').equalTo(item.image_ref).on('child_added', function(snapshot){
 				snapshot.ref.remove();
 				firebase.storage().ref(item.image_ref).delete();

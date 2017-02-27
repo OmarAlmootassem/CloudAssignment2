@@ -13,11 +13,17 @@ angular.module('myApp.view_auth', ['ngRoute'])
 	$scope.signInUp = false;
 	$scope.user = {};
 
+	/**
+	 *	Switch between sign in and sign up
+	 */
 	$scope.switchView = function(){
 		$scope.signInUp = !$scope.signInUp;
 		$scope.$applyAsync();
 	}
 
+	/**
+	 *	Create a new user in firebase and catch error
+	 */
 	$scope.signUp = function(input){
 		console.log(input)
 		firebase.auth().createUserWithEmailAndPassword(input.email, input.password).then(function(user){
@@ -38,6 +44,9 @@ angular.module('myApp.view_auth', ['ngRoute'])
 		});
 	}
 
+	/**
+	 *	Sign in user in firebase and catch error
+	 */
 	$scope.signIn = function(input){
 		firebase.auth().signInWithEmailAndPassword(input.email, input.password).then(function(user){
 			console
