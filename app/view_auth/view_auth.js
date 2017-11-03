@@ -25,7 +25,6 @@ angular.module('myApp.view_auth', ['ngRoute'])
 	 *	Create a new user in firebase and catch error
 	 */
 	$scope.signUp = function(input){
-		console.log(input)
 		firebase.auth().createUserWithEmailAndPassword(input.email, input.password).then(function(user){
 			firebase.database().ref('users/' + user.uid).update({
 	          first_name: input.fname,
@@ -49,7 +48,6 @@ angular.module('myApp.view_auth', ['ngRoute'])
 	 */
 	$scope.signIn = function(input){
 		firebase.auth().signInWithEmailAndPassword(input.email, input.password).then(function(user){
-			console
 			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
 				$mdToast.show(
 			        $mdToast.simple()

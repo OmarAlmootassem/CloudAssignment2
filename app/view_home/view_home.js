@@ -10,14 +10,12 @@ angular.module('myApp.view_home', ['ngRoute'])
 }])
 
 .controller('HomeCtrl', function($scope, $rootScope, $mdDialog) {
-	console.log($rootScope.itemList);
 	$scope.search = $rootScope.search;
 
-	/**
-	 *	Deletes an Items
+	/*
+	 Deletes an Items
 	 */
 	$scope.delete = function(ev, item, index){
-		console.log(item);
 		//Create and display confirmation dialog
 		var confirm = $mdDialog.confirm()
 			.title("Are You Sure?")
