@@ -10,7 +10,6 @@
   <title>Personal Inventory</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -22,7 +21,7 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="NavCtrl">
-<md-content>
+<md-content class="toolbar">
   <md-toolbar ng-if="auth" ng-cloak>
     <div class="md-toolbar-tools">
       <div flex="30">Personal Inventory Management</div>
@@ -36,7 +35,7 @@
       <div flex></div>
       <md-menu ng-if="initials" md-offset="0 60">
         <md-button ng-click="$mdOpenMenu()" class="md-icon-button" aria-label="Open sample menu">
-          <ng-avatar md-menu-origin initials="{{initials}}" auto-color="true" upper-case="true" style="position: absolute; right: -3px; bottom: -3px;"></ng-avatar>
+          <ng-avatar md-menu-origin initials="{{initials}}" auto-color="true" upper-case="true" class="avatar"></ng-avatar>
         </md-button>
         <md-menu-content>
           <md-menu-item><md-button ng-click="showSiteInfo($event)">Site Info</md-button></md-menu-item>
@@ -47,19 +46,11 @@
   </md-toolbar>
 </md-content>
 
-<!--   <ul class="menu">
-    <li><a href="#!/view_auth">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul> -->
-
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
-
-  <!-- <div>Angular seed app: v<span app-version></span></div> -->
-
+  <div ng-view class="view"></div>
 
   <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
   <script>

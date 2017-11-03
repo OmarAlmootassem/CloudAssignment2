@@ -13,7 +13,7 @@
 		<div class="md-dialog-content">
 			<form name="uploadImageForm" layout="column">
 			    <lf-ng-md-file-input name="images" lf-files="files" lf-api="image" accept="image/*" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
-			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary" ng-click="image.removeAll()" style="display: none;">UPLOAD</md-button>
+			    <md-button type="button" ng-disabled="testForm.$invalid" class="md-raised md-primary hide" ng-click="image.removeAll()">UPLOAD</md-button>
 			</form>
 			<div layout="row" style="margin-top: 2%;"></div>
 			<div layout="row">

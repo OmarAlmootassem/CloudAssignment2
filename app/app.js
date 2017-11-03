@@ -21,7 +21,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		if (user){	//Signed In
 			$scope.auth = true;
 			$location.path('home');	//Go to home page
-			console.log("Signed In");
 			//Get User Info
 			firebase.database().ref('users/' + user.uid).once('value').then(function(snapshot){
 				$scope.initials = snapshot.val().first_name.charAt(0);
@@ -31,7 +30,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		} else {	//Signed Out
 			$scope.auth = false;
 			$location.path('auth');	//Go to auth page
-			console.log("Not Signed In");
 			$scope.$applyAsync();
 		}
 	});
@@ -56,7 +54,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		//Get number of active users
 		firebase.database().ref('users').on('value', function(snapshot){
 			$scope.numUsers = snapshot.numChildren();
-			console.log($scope.numUsers);
 		});
 
 		/**
@@ -122,7 +119,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		// Called when a file is placed into the upload area
 		$scope.$watch('files.length', function(newVal, oldVal){
 			if($scope.files.length == 1){
-				console.log($scope.files[0]);
 				var reader = new FileReader();
 				var imageBase64;
 				reader.onload = function(event){
@@ -148,7 +144,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 						processData: false,
 						data:JSON.stringify(json),
 						success: function(data){
-							// console.log(data);
 							//Put the returned tag into an array to display
 							for (var i = 0; i < data.responses[0].labelAnnotations.length; i++){
 								$scope.imageTags.push(data.responses[0].labelAnnotations[i].description);
@@ -168,7 +163,6 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 		 */
 		$scope.addItem = function(){
 			firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid + '/images/' + Date.now() + $scope.files[0].lfFileName).put($scope.files[0].lfFile).then(function(snapshot){
-				console.log(snapshot);
 				var postKey = firebase.database().ref("items/" + firebase.auth().currentUser.uid).push().key;
 				firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey).update({
 					date: $scope.date.toISOString(),
@@ -176,7 +170,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 					image_ref: snapshot.a.fullPath
 				}, function(error){
 					if (error){
-						console.log(error.errorMessage);
+						console.error(error.errorMessage);
 					} else {
 						for (var i = 0; i < $scope.imageTags.length; i++) {
 							firebase.database().ref("items/" + firebase.auth().currentUser.uid + "/" + postKey + "/tags").push($scope.imageTags[i]);
