@@ -8,8 +8,7 @@ angular.module('myApp', ['ngMaterial', 'ngAvatar', 'lfNgMdFileInput',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
-
+  $locationProvider.html5Mode(true);
   $routeProvider.otherwise({redirectTo: '/view_auth'});
 }])
 
