@@ -139,7 +139,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 					//Call the vision apu
 					$.ajax({
 						method:'POST',
-						url:'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyB6XH2RQ-2wfUMPQSp0r06UUyXgxo42Kt8',
+						url:'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBwOlgN9VRye_C68c-upAVaBKlwe830_qU',
 						contentType: 'application/json',
 						processData: false,
 						data:JSON.stringify(json),
