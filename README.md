@@ -8,3 +8,8 @@ Next part is the item upload. The image chooser for the item upload is from a bo
 
 Once the item is added, a reference is saved in Firebase NoSQL database and the image is stored in Firebase Storage.
 I used an Angular Seed so I do not have to build the entire architecture from scratch. The seed is available on GitHub: https://github.com/angular/angular-seed. For the animations, I used animate.css which is available from https://daneden.github.io/animate.css/. For the user profile image I used angular-avatar to generate avatars based on the user’s first name: https://github.com/ajsoriar/angular-avatar.
+
+## Sample Login Information
+Username: `test@test.com`
+
+Password: `password`
