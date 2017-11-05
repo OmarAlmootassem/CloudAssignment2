@@ -27,7 +27,7 @@ var http = require('http');
 // server.listen(port, function(){
 // 	console.log('Server started on port '+app.get('port'));
 // });
-server.on('error', onError);
+// server.on('error', onError);
 
 /**
  * Normalize a port into a number, string, or false.
