@@ -12,7 +12,7 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $routeProvider.otherwise({redirectTo: '/view_auth'});
 }])
 
-.controller('NavCtrl', function($scope, $rootScope, $mdDialog, $location, $mdToast) {
+.controller('NavCtrl', function($scope, $rootScope, $mdDialog, $location, $mdToast, $http) {
 	$rootScope.search = $scope.search;
 
 	//Authentication change listener
@@ -135,24 +135,17 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 							}
 						]
 					};
-
-					//Call the vision apu
-					$.ajax({
-						method:'POST',
-						url:'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBwOlgN9VRye_C68c-upAVaBKlwe830_qU',
-						contentType: 'application/json',
-						processData: false,
-						data:JSON.stringify(json),
-						success: function(data){
+					//Call the vision api
+					$http.post('http://35.196.176.82:3001/api/cloud/2/photo/analyze', {img: json}).then(function(data) {
+							const response = data.data;
 							//Put the returned tag into an array to display
-							for (var i = 0; i < data.responses[0].labelAnnotations.length; i++){
-								$scope.imageTags.push(data.responses[0].labelAnnotations[i].description);
+							for (var i = 0; i < response.responses[0].labelAnnotations.length; i++){
+								$scope.imageTags.push(response.responses[0].labelAnnotations[i].description);
 							}
 							$scope.$applyAsync();
-						}, error: function(data, textStatus, errorThrown){
-							console.error(data);
-						}
-					});
+						}, function(err) {
+							console.error(err);
+						});
 				}
 				reader.readAsDataURL($scope.files[0].lfFile);
 			}
